@@ -1,4 +1,4 @@
-package lifecounter
+package Counters.lifeCounter
 
 class LifeCounter(private val currentLife: Int) {
 
