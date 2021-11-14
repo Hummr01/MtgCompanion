@@ -1,6 +1,6 @@
-package counters.playerCounters
+package de.mtg.companion.shared.counters.playerCounters
 
-import counters.Counter
+import de.mtg.companion.shared.counters.Counter
 
 class ExperienceCounter: Counter {
 

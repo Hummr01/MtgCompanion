@@ -1,4 +1,4 @@
-package counters
+package de.mtg.companion.shared.counters
 
 interface Counter {
     fun addAmount(amount: Int): Int

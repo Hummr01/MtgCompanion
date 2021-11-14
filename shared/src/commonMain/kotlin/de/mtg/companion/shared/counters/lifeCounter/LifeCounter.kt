@@ -1,6 +1,6 @@
-package counters.lifeCounter
+package de.mtg.companion.shared.counters.lifeCounter
 
-import counters.Counter
+import de.mtg.companion.shared.counters.Counter
 
 class LifeCounter(private val currentLife: Int): Counter {
     override fun addAmount(amount: Int): Int {
