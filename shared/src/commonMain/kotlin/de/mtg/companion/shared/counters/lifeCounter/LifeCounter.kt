@@ -2,7 +2,13 @@ package de.mtg.companion.shared.counters.lifeCounter
 
 import de.mtg.companion.shared.counters.Counter
 
-class LifeCounter(private val currentLife: Int): Counter {
+open class LifeCounter(private val currentLife: Int): Counter {
+
+
+    override fun getAmount(amount: Int): Int {
+        return currentLife
+    }
+
     override fun addAmount(amount: Int): Int {
         return currentLife + amount
     }
@@ -28,6 +34,6 @@ class LifeCounter(private val currentLife: Int): Counter {
     }
 
     override fun setAmountTo(amount: Int): Int {
-        return amount;
+        return amount
     }
 }

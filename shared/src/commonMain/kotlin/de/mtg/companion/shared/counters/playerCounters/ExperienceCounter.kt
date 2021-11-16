@@ -3,6 +3,9 @@ package de.mtg.companion.shared.counters.playerCounters
 import de.mtg.companion.shared.counters.Counter
 
 class ExperienceCounter: Counter {
+    override fun getAmount(amount: Int): Int {
+        TODO("Not yet implemented")
+    }
 
     override fun addAmount(amount: Int): Int {
         TODO("Not yet implemented")
