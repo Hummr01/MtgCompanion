@@ -1,5 +1,11 @@
-/.gradle/
-/build/
-/androidApp/build/
-/shared/build/
+*.iml
+.gradle
 /local.properties
+.idea
+.DS_Store
+/build
+*/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
