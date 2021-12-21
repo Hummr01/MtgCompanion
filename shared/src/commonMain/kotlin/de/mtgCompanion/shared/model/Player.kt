@@ -1,8 +1,13 @@
 package de.mtgCompanion.shared.model
 
-class Player {
+import de.mtgCompanion.shared.Constants.PLAYER_COLOR_WHITE
 
-    val life : Counter = Counter()
+class Player(lifeAmount : Int = 0)  {
 
+    val lifeCounter : Counter = Counter(lifeAmount)
+    val poisonCounter : Counter = Counter()
+    val experienceCounter : Counter = Counter()
+    val energyCounter : Counter = Counter()
 
+    var color = PLAYER_COLOR_WHITE
 }
