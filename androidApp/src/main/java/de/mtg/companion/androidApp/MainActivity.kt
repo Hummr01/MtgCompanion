@@ -2,19 +2,25 @@ package de.mtg.companion.androidApp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import de.mtg.companion.shared.Greeting
-import android.widget.TextView
-
-fun greet(): String {
-    return Greeting().greeting()
-}
+import android.view.LayoutInflater
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val tv: TextView = findViewById(R.id.text_view)
-        tv.text = greet()
+        val view = layoutInflater.inflate(R.layout.lifecounter, null)
+        val view2 = layoutInflater.inflate(R.layout.lifecounter, null)
+
+
+        val layout = findViewById<LinearLayout>(R.id.relativeLayout)
+
+        layout.addView(view)
+        layout.addView(view2)
+
     }
+
 }

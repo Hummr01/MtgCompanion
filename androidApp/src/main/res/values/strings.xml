@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="lifecount">LifeCount</string>
+    <string name="subbtn">-</string>
+    <string name="addbtn">+</string>
+</resources>
