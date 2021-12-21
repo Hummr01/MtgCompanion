@@ -1,4 +1,4 @@
-package de.mtgCompanion
+package de.mtgCompanion.shared
 
 import kotlin.test.Test
 import kotlin.test.assertTrue

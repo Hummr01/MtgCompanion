@@ -2,7 +2,7 @@ package de.mtgCompanion.android
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import de.mtgCompanion.Greeting
+import de.mtgCompanion.shared.Greeting
 import android.widget.TextView
 
 fun greet(): String {

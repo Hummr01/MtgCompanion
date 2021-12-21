@@ -1,4 +1,4 @@
-package de.mtg.companion.shared
+package de.mtgCompanion.shared
 
 expect class Platform() {
     val platform: String

@@ -1,5 +1,4 @@
-package de.mtg.companion.shared
-
+package de.mtgCompanion.shared
 
 class Greeting {
     fun greeting(): String {

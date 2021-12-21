@@ -1,5 +1,6 @@
 package de.mtgCompanion
 
+import de.mtgCompanion.shared.Greeting
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
