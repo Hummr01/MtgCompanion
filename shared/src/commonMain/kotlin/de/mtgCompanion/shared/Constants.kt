@@ -5,4 +5,5 @@ object Constants {
     const val PLAYER_COLOR_BLACK = "Black"
     const val PLAYER_COLOR_RED = "Red"
     const val PLAYER_COLOR_GREEN = "Green"
+    const val PLAYER_COLOR_BLUE = "Blue"
 }
