@@ -1,8 +1,11 @@
 package de.mtgCompanion.android
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import org.w3c.dom.Text
 
@@ -16,13 +19,42 @@ private const val ARG_PARAM2 = "param2"
  * Use the [PlayerFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PlayerFragment : Fragment(R.layout.fragment_player) {
+class PlayerFragment : Fragment() {
 
+    private lateinit var subbBtn : Button
+    private lateinit var addBtn : Button
 
-    fun setText(text: String) {
-        val tv : TextView = requireView().findViewById(R.id.lifeCounter)
-        tv.text = text
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        val view = inflater.inflate(R.layout.fragment_player, container, false)
+
+        subbBtn = view.findViewById(R.id.subbtn)
+        addBtn = view.findViewById(R.id.addbtn)
+
+        subbBtn.setOnClickListener{
+            view.findViewById<TextView>(R.id.lifeCounter).text = "40"
+        }
+
+        view.findViewById<Button>(R.id.subbtn)
+
+        // Inflate the layout for this fragment
+        return view
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        view.findViewById<TextView>(R.id.lifeCounter).text = "lullatsch"
+
+        super.onViewCreated(view, savedInstanceState)
+
+
+    }
+
+
+
 
     companion object {
         /**

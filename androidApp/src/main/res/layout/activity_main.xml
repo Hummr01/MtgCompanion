@@ -1,43 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_view"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
 
 
     <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:alwaysDrawnWithCache="false"
-            tools:layout_editor_absoluteY="376dp"
-            tools:layout_editor_absoluteX="-110dp">
+            android:layout_height="match_parent">
 
         <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
 
             <androidx.fragment.app.FragmentContainerView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:name="de.mtgCompanion.android.PlayerFragment"
                     android:id="@+id/fragmentPlayerOne"
-                    tools:layout="@layout/fragment_player" />
+                    tools:layout="@layout/fragment_player"
+                    android:layout_weight="1" />
         </TableRow>
-
 
         <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:layout_weight="0.1"
+                android:gravity="center" />
+
+        <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
 
             <androidx.fragment.app.FragmentContainerView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:name="de.mtgCompanion.android.PlayerFragment"
                     android:id="@+id/fragmentPLayerTwo"
-                    tools:layout="@layout/fragment_player" />
+                    tools:layout="@layout/fragment_player"
+                    android:layout_weight="1" />
         </TableRow>
     </TableLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

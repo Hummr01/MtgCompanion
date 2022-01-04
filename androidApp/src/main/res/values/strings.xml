@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="lifecountPLayerOne">LifeCount</string>
-        <string name="subbtn">-</string>
+    <string name="subbtn">-</string>
     <string name="addbtn">+</string>
     <string name="lifecount">LifeCounter</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
