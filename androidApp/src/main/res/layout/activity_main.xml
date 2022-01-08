@@ -23,15 +23,23 @@
                     android:layout_height="match_parent"
                     android:id="@+id/fragmentPlayerOne"
                     tools:layout="@layout/fragment_player"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"/>
         </TableRow>
 
         <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone"
-                android:layout_weight="0.1"
-                android:gravity="center" />
+                android:gravity="center"
+                android:visibility="visible">
+
+            <androidx.fragment.app.FragmentContainerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/fragmentMenu"
+                    android:layout_weight="1"
+                    tools:layout="@layout/fragment_menu" />
+
+        </TableRow>
 
         <TableRow
                 android:layout_width="match_parent"
