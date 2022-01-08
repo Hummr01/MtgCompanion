@@ -1,11 +1,11 @@
 package de.mtgCompanion.shared.model
 
-import de.mtgCompanion.shared.PlayerNotFoundException
-import kotlin.math.abs
+import de.mtgCompanion.shared.Constants
 
-class AppService(private val playerLife: Int = 0) {
 
-    val playerList = HashMap<Int, Player>()
+class AppService(private val playerLife: Int = Constants.LIFE_STANDARD) {
+
+    val playerList = ArrayList<Player>()
 
     /**
      * sets the number of players.
@@ -19,7 +19,7 @@ class AppService(private val playerLife: Int = 0) {
         }
         this.playerList.clear()
         for (i in 0 until numberOfPlayers) {
-            playerList[i] = Player(playerLife)
+            playerList.add(Player(playerLife))
         }
     }
 
@@ -27,7 +27,7 @@ class AppService(private val playerLife: Int = 0) {
      * Resets the counters (life counter etc.)
      */
     fun startNewGame() {
-        for ((id, player) in playerList) {
+        for (player in playerList) {
             player.resetCounters()
         }
     }
@@ -36,53 +36,7 @@ class AppService(private val playerLife: Int = 0) {
      * Chooses a player at random.
      * @return the ID of the chosen player
      */
-    fun choosePlayerAtRandom(): Int {
-        return playerList.keys.shuffled().first()
-    }
-
-    /**
-     * changes the amount of life for the player by the amount.
-     * @param playerID the ID of the player whose life is about to be changed
-     * @param amount the amount by which the life gonna be changed
-     * @return the new amount for the player - null if the player doesn't exist
-     */
-    fun alterPlayersLifeTotalBy(playerID: Int, amount: Int): Int {
-        val lifeCounter = playerList[playerID]?.lifeCounter
-            ?: throw PlayerNotFoundException("Player with ID $playerID could not be found in the list")
-
-        return alterAmountOfCounterBy(lifeCounter, amount)
-    }
-
-    fun alterPlayersPoisonCounterAmountBy(playerID: Int, amount: Int): Int? {
-        val poisonCounter = playerList[playerID]?.poisonCounter
-            ?: throw PlayerNotFoundException("Player with ID $playerID could not be found in the list")
-
-        return alterAmountOfCounterBy(poisonCounter, amount)
-    }
-
-    fun alterPlayersExperienceCounterAmountBy(playerID: Int, amount: Int): Int? {
-        val experienceCounter = playerList[playerID]?.experienceCounter
-            ?: throw PlayerNotFoundException("Player with ID $playerID could not be found in the list")
-
-        return alterAmountOfCounterBy(experienceCounter, amount)
-    }
-
-    fun alterPlayersEnergyCounterAmountBy(playerID: Int, amount: Int): Int? {
-        val energyCounter = playerList[playerID]?.energyCounter
-            ?: throw PlayerNotFoundException("Player with ID $playerID could not be found in the list")
-
-        return alterAmountOfCounterBy(energyCounter, amount)
-    }
-
-    private fun alterAmountOfCounterBy(counter: Counter, amount: Int): Int {
-        if (amount > 0) {
-            // amount is positive
-            counter.raiseBy(amount)
-        } else {
-            // amount is negative
-            counter.decreaseBy(abs(amount))
-        }
-
-        return counter.amount
+    fun choosePlayerAtRandom(): Player? {
+        return playerList.asSequence().shuffled().find { true }
     }
 }
