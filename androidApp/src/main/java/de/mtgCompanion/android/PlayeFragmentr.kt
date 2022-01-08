@@ -7,7 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import org.w3c.dom.Text
+import com.google.gson.Gson
+import de.mtgCompanion.shared.model.Player
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -19,7 +20,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [PlayerFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PlayerFragment : Fragment() {
+class PlayerFragment : Fragment(R.layout.fragment_player) {
 
     private lateinit var subbBtn : Button
     private lateinit var addBtn : Button
@@ -30,12 +31,18 @@ class PlayerFragment : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_player, container, false)
+        val player = Gson().fromJson(requireArguments().getString("player"), Player::class.java)
+        view.findViewById<TextView>(R.id.lifeCounter).text = player.lifeCounter.amount.toString()
 
         subbBtn = view.findViewById(R.id.subbtn)
         addBtn = view.findViewById(R.id.addbtn)
 
         subbBtn.setOnClickListener{
-            view.findViewById<TextView>(R.id.lifeCounter).text = "40"
+            view.findViewById<TextView>(R.id.lifeCounter).text = player.alterPlayersLifeTotalBy(-1).toString()
+        }
+
+        addBtn.setOnClickListener{
+            view.findViewById<TextView>(R.id.lifeCounter).text = player.alterPlayersLifeTotalBy(1).toString()
         }
 
         view.findViewById<Button>(R.id.subbtn)
@@ -44,17 +51,16 @@ class PlayerFragment : Fragment() {
         return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        view.findViewById<TextView>(R.id.lifeCounter).text = "lullatsch"
-
-        super.onViewCreated(view, savedInstanceState)
-
-
-    }
-
-
-
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//
+//
+//
+//        view.findViewById<TextView>(R.id.lifeCounter).text = player.lifeCounter.amount.toString()
+//
+//        super.onViewCreated(view, savedInstanceState)
+//
+//
+//    }
 
     companion object {
         /**

@@ -28,4 +28,5 @@ dependencies {
     implementation("androidx.gridlayout:gridlayout:1.0.0")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.fragment:fragment-ktx:1.4.0")
+    implementation("com.google.code.gson:gson:2.8.9")
 }

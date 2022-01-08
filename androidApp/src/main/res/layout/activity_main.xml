@@ -21,7 +21,6 @@
             <androidx.fragment.app.FragmentContainerView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:name="de.mtgCompanion.android.PlayerFragment"
                     android:id="@+id/fragmentPlayerOne"
                     tools:layout="@layout/fragment_player"
                     android:layout_weight="1" />
@@ -43,7 +42,6 @@
             <androidx.fragment.app.FragmentContainerView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:name="de.mtgCompanion.android.PlayerFragment"
                     android:id="@+id/fragmentPLayerTwo"
                     tools:layout="@layout/fragment_player"
                     android:layout_weight="1" />
