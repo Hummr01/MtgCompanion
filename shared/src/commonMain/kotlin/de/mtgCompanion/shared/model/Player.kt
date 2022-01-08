@@ -3,7 +3,7 @@ package de.mtgCompanion.shared.model
 import de.mtgCompanion.shared.Constants.PLAYER_COLOR_WHITE
 import kotlin.math.abs
 
-class Player(val startLifeAmount: Int = 0) {
+class Player(private val startLifeAmount: Int = 0) {
 
     val lifeCounter: Counter = Counter(startLifeAmount)
     val poisonCounter: Counter = Counter()
