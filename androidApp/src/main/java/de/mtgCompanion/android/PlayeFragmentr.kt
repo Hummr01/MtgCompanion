@@ -22,8 +22,6 @@ private const val ARG_PARAM2 = "param2"
  */
 class PlayerFragment : Fragment(R.layout.fragment_player) {
 
-    private lateinit var subbBtn : Button
-    private lateinit var addBtn : Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,10 +32,10 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
         val player = Gson().fromJson(requireArguments().getString("player"), Player::class.java)
         view.findViewById<TextView>(R.id.lifeCounter).text = player.lifeCounter.amount.toString()
 
-        subbBtn = view.findViewById(R.id.subbtn)
-        addBtn = view.findViewById(R.id.addbtn)
+        val subBtn = view.findViewById<Button>(R.id.subbtn)
+        val addBtn = view.findViewById<Button>(R.id.addbtn)
 
-        subbBtn.setOnClickListener{
+        subBtn.setOnClickListener{
             view.findViewById<TextView>(R.id.lifeCounter).text = player.alterPlayersLifeTotalBy(-1).toString()
         }
 
@@ -48,7 +46,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
         view.findViewById<Button>(R.id.subbtn)
 
         // Inflate the layout for this fragment
-        return view
+        return inflater.inflate(R.layout.fragment_player, container, false)
     }
 
 //    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
