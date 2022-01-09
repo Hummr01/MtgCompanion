@@ -17,10 +17,20 @@ class AppService(private val playerLife: Int = Constants.LIFE_STANDARD) {
             // number of players didn't change -> abort
             return
         }
-        this.playerList.clear()
-        for (i in 0 until numberOfPlayers) {
+
+        // reset all counters of current players and add or remove players as needed
+        startNewGame()
+
+        // add players if needed
+        while (this.playerList.size < numberOfPlayers) {
             playerList.add(Player(playerLife))
         }
+
+        // remove players if to many
+        while (this.playerList.size > numberOfPlayers) {
+            this.playerList.removeLast();
+        }
+
     }
 
     /**
