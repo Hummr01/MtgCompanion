@@ -3,6 +3,7 @@
     package="de.mtgCompanion.android">
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="false"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">

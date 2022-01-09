@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="androidApp/src/main/res/layout/activity_main.xml" value="0.33489583333333334" />
+        <entry key="androidApp/src/main/res/layout/fragment_menu.xml" value="0.2125" />
       </map>
     </option>
   </component>
