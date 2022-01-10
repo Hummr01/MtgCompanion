@@ -36,7 +36,7 @@ class MenuFragment : Fragment() {
             MyApplication.appService.setNumberOfPlayers(2)
         }
         view.findViewById<Button>(R.id.startLife).setOnClickListener {
-//            MyApplication.appService.
+            MyApplication.appService.setPlayerLifeTo(40)
         }
         return view
     }

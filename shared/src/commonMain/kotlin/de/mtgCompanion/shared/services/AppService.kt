@@ -1,10 +1,12 @@
 package de.mtgCompanion.shared.services
 
 import de.mtgCompanion.shared.Constants
+import de.mtgCompanion.shared.model.Counter
 import de.mtgCompanion.shared.model.Player
 
-class AppService(private val playerLife: Int = Constants.LIFE_STANDARD) {
+class AppService() {
 
+    var startLife: Int = Constants.LIFE_STANDARD
     val playerList = ArrayList<Player>()
 
     /**
@@ -18,19 +20,18 @@ class AppService(private val playerLife: Int = Constants.LIFE_STANDARD) {
             return
         }
 
+        // remove players if too many
+        while (this.playerList.size > numberOfPlayers) {
+            this.playerList.removeLast();
+        }
+
         // reset all counters of current players and add or remove players as needed
         startNewGame()
 
         // add players if needed
         while (this.playerList.size < numberOfPlayers) {
-            playerList.add(Player(playerLife))
+            playerList.add(Player(startLife))
         }
-
-        // remove players if to many
-        while (this.playerList.size > numberOfPlayers) {
-            this.playerList.removeLast();
-        }
-
     }
 
     /**
@@ -39,6 +40,17 @@ class AppService(private val playerLife: Int = Constants.LIFE_STANDARD) {
     fun startNewGame() {
         for (player in playerList) {
             player.resetCounters()
+        }
+    }
+
+    /**
+     *
+     */
+    fun setPlayerLifeTo(newLife : Int) {
+        this.startLife = newLife
+        for (player in playerList) {
+            player.startLifeAmount = newLife
+            player.lifeCounter.amount = newLife
         }
     }
 

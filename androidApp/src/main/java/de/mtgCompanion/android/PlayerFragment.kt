@@ -17,7 +17,7 @@ private const val PLAYER_ARG = "player"
  * Use the [PlayerFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PlayerFragment : Fragment(R.layout.fragment_player) {
+class PlayerFragment : Fragment() {
     private var playerJson: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
