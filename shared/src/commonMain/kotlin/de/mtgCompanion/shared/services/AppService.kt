@@ -1,7 +1,7 @@
-package de.mtgCompanion.shared.model
+package de.mtgCompanion.shared.services
 
 import de.mtgCompanion.shared.Constants
-
+import de.mtgCompanion.shared.model.Player
 
 class AppService(private val playerLife: Int = Constants.LIFE_STANDARD) {
 

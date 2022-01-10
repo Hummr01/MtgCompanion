@@ -1,12 +1,8 @@
 package de.mtgCompanion.android
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.os.bundleOf
-import androidx.fragment.app.add
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
-import com.google.gson.Gson
-import de.mtgCompanion.shared.model.AppService
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,9 +14,9 @@ class MainActivity : AppCompatActivity() {
 
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
-                add<PlayerFragment>(R.id.fragmentPlayerOne, args = bundleOf("player" to Gson().toJson(MyApplication.appService.playerList[0])))
-                add<PlayerFragment>(R.id.fragmentPLayerTwo, args = bundleOf("player" to Gson().toJson(MyApplication.appService.playerList[1])))
-                add<menuFragment>(R.id.fragmentMenu)
+                add(R.id.fragmentPlayerOne, PlayerFragment.newInstance(MyApplication.appService.playerList[0]))
+                add(R.id.fragmentPlayerTwo, PlayerFragment.newInstance(MyApplication.appService.playerList[1]))
+                add(R.id.fragmentMenu, MenuFragment.newInstance())
             }
         }
     }
