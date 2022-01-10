@@ -14,38 +14,38 @@
             android:gravity="center">
 
         <Button
-                android:text="Button"
+                android:text="new"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button5"
+                android:id="@+id/restart"
                 android:layout_weight="1" />
 
         <Button
-                android:text="Button"
+                android:text="Dice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button4"
+                android:id="@+id/randomPlayer"
                 android:layout_weight="1" />
 
         <Button
-                android:text="Button"
+                android:text="hide"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button3"
+                android:id="@+id/toggleVisibility"
                 android:layout_weight="1" />
 
         <Button
-                android:text="Button"
+                android:text="number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button2"
+                android:id="@+id/numberOfPlayers"
                 android:layout_weight="1" />
 
         <Button
-                android:text="Button"
+                android:text="Life"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button"
+                android:id="@+id/startLife"
                 android:layout_weight="1" />
     </LinearLayout>
 </FrameLayout>

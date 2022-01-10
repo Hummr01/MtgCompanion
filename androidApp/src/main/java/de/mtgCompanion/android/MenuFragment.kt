@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 
 /**
@@ -18,7 +19,26 @@ class MenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false)
+        val view = inflater.inflate(R.layout.fragment_menu, container, false)
+
+        // set Button on click listeners
+        view.findViewById<Button>(R.id.restart).setOnClickListener {
+            MyApplication.appService.startNewGame()
+        }
+        view.findViewById<Button>(R.id.randomPlayer).setOnClickListener {
+            MyApplication.appService.choosePlayerAtRandom()
+        }
+        view.findViewById<Button>(R.id.toggleVisibility).setOnClickListener {
+            view.visibility = View.GONE
+        }
+        view.findViewById<Button>(R.id.numberOfPlayers).setOnClickListener {
+            //TODO: setNumberOfPlayers with var
+            MyApplication.appService.setNumberOfPlayers(2)
+        }
+        view.findViewById<Button>(R.id.startLife).setOnClickListener {
+//            MyApplication.appService.
+        }
+        return view
     }
 
     companion object {
