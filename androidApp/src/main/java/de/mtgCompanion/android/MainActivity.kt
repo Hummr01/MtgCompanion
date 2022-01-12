@@ -14,8 +14,8 @@ class MainActivity : AppCompatActivity() {
 
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
-                add(R.id.fragmentPlayerOne, PlayerFragment.newInstance(MyApplication.appService.playerList[0]))
-                add(R.id.fragmentPlayerTwo, PlayerFragment.newInstance(MyApplication.appService.playerList[1]))
+                add(R.id.fragmentPlayerOne, PlayerFragment.newInstance(0))
+                add(R.id.fragmentPlayerTwo, PlayerFragment.newInstance(1))
                 add(R.id.fragmentMenu, MenuFragment.newInstance())
             }
         }
