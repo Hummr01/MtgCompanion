@@ -3,6 +3,21 @@ package de.mtgCompanion.android
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+
+/**
+ * Controls the UI of all players
+ */
+class PlayerViewModel : ViewModel() {
+
+    val life = MutableLiveData<Int>()
+
+    fun setLife(life: Int) {
+        MyApplication.appService.setPlayerStartLifeAmountTo(life)
+        this.life.value = life
+    }
+}
 
 class MainActivity : AppCompatActivity() {
 

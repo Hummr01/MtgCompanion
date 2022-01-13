@@ -34,7 +34,7 @@ class AppService() {
     }
 
     /**
-     * Resets the counters (life counter etc.)
+     * Resets the counters (life counter etc.) of each player
      */
     fun startNewGame() {
         for (player in playerMap) {
@@ -43,9 +43,10 @@ class AppService() {
     }
 
     /**
-     *
+     * sets the start life amount for each player to newLife
+     * @param newLife the new start life of each player
      */
-    fun setPlayerLifeTo(newLife : Int) {
+    fun setPlayerStartLifeAmountTo(newLife : Int) {
         this.startLife = newLife
         for (player in playerMap) {
             player.startLifeAmount = newLife

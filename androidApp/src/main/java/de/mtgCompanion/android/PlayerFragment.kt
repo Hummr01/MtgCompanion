@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import de.mtgCompanion.shared.model.Player
@@ -20,7 +21,7 @@ private const val PLAYER_ID_ARG = "id"
  */
 class PlayerFragment : Fragment() {
     private var playerId: Int = -1
-    val playerListener: MutableLiveData<Int> = MutableLiveData()
+    private val model: PlayerViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,21 +35,25 @@ class PlayerFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        playerListener.value = MyApplication.appService.getPlayerByIndex(playerId).lifeCounter.amount
         val view = inflater.inflate(R.layout.fragment_player, container, false)
+        val player = MyApplication.appService.getPlayerByIndex(playerId)
+        val lifeCounter = view.findViewById<TextView>(R.id.lifeCounter)
 
-        playerListener.observe(this, {
-            view.findViewById<TextView>(R.id.lifeCounter).text =
-                playerListener.value.toString()
-        })
+        // initially set the life of the player
+        lifeCounter.text = player.lifeCounter.amount.toString()
 
+        // Add and subtract methods
         view.findViewById<Button>(R.id.subbtn).setOnClickListener {
-                MyApplication.appService.getPlayerByIndex(playerId).alterPlayersLifeTotalBy(-1).toString()
+            lifeCounter.text = MyApplication.appService.getPlayerByIndex(playerId).alterPlayersLifeTotalBy(-1).toString()
+        }
+        view.findViewById<Button>(R.id.addbtn).setOnClickListener {
+            lifeCounter.text = MyApplication.appService.getPlayerByIndex(playerId).alterPlayersLifeTotalBy(1).toString()
         }
 
-        view.findViewById<Button>(R.id.addbtn).setOnClickListener {
-                MyApplication.appService.getPlayerByIndex(playerId).alterPlayersLifeTotalBy(1).toString()
-        }
+        // observe the life of all players. On change -> update the view
+        model.life.observe(viewLifecycleOwner, { life ->
+            lifeCounter.text = life.toString()
+        })
 
         return view
     }

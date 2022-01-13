@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 
 /**
  * A simple [Fragment] subclass.
@@ -13,6 +14,8 @@ import androidx.fragment.app.Fragment
  * create an instance of this fragment.
  */
 class MenuFragment : Fragment() {
+
+    private val model: PlayerViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,6 +26,7 @@ class MenuFragment : Fragment() {
 
         // set Button on click listeners
         view.findViewById<Button>(R.id.restart).setOnClickListener {
+            //TODO: must trigger UI update
             MyApplication.appService.startNewGame()
         }
         view.findViewById<Button>(R.id.randomPlayer).setOnClickListener {
@@ -32,11 +36,12 @@ class MenuFragment : Fragment() {
             view.visibility = View.GONE
         }
         view.findViewById<Button>(R.id.numberOfPlayers).setOnClickListener {
-            //TODO: setNumberOfPlayers with var
+            //TODO: add variables
             MyApplication.appService.setNumberOfPlayers(2)
         }
         view.findViewById<Button>(R.id.startLife).setOnClickListener {
-            MyApplication.appService.setPlayerLifeTo(40)
+            //TODO: add variables
+            model.setLife(40)
         }
         return view
     }
