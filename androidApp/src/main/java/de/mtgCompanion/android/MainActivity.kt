@@ -3,23 +3,8 @@ package de.mtgCompanion.android
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 
-/**
- * Controls the UI of all players
- */
-class PlayerViewModel : ViewModel() {
-
-    val life = MutableLiveData<Int>()
-
-    fun setLife(life: Int) {
-        MyApplication.appService.setPlayerStartLifeAmountTo(life)
-        this.life.value = life
-    }
-}
-
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MenuFragment.TextClicked {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,5 +19,10 @@ class MainActivity : AppCompatActivity() {
                 add(R.id.fragmentMenu, MenuFragment.newInstance())
             }
         }
+    }
+
+    override fun sendText(text: String?, playerId: Int) {
+        val frag: PlayerFragment = supportFragmentManager.findFragmentById(playerId) as PlayerFragment
+        frag.updateText(text)
     }
 }

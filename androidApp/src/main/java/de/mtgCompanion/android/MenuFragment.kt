@@ -1,5 +1,6 @@
 package de.mtgCompanion.android
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import java.lang.ClassCastException
+
 
 /**
  * A simple [Fragment] subclass.
@@ -15,7 +18,31 @@ import androidx.fragment.app.activityViewModels
  */
 class MenuFragment : Fragment() {
 
-    private val model: PlayerViewModel by activityViewModels()
+    var mCallback: TextClicked? = null
+
+    interface TextClicked {
+        fun sendText(text: String?, playerId: Int)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        mCallback = try {
+            context as TextClicked
+        } catch (e: ClassCastException) {
+            throw ClassCastException(
+                context.toString()
+                        + " must implement TextClicked"
+            )
+        }
+    }
+
+    override fun onDetach() {
+        mCallback = null // => avoid leaking, thanks @Deepscorn
+        super.onDetach()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +68,10 @@ class MenuFragment : Fragment() {
         }
         view.findViewById<Button>(R.id.startLife).setOnClickListener {
             //TODO: add variables
-            model.setLife(40)
+//            model.setLife(40)
+            MyApplication.appService.setPlayerStartLifeAmountTo(40)
+            mCallback!!.sendText("40", R.id.fragmentPlayerOne)
+            mCallback!!.sendText("40", R.id.fragmentPlayerTwo)
         }
         return view
     }

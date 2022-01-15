@@ -21,7 +21,6 @@ private const val PLAYER_ID_ARG = "id"
  */
 class PlayerFragment : Fragment() {
     private var playerId: Int = -1
-    private val model: PlayerViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,12 +49,11 @@ class PlayerFragment : Fragment() {
             lifeCounter.text = MyApplication.appService.getPlayerByIndex(playerId).alterPlayersLifeTotalBy(1).toString()
         }
 
-        // observe the life of all players. On change -> update the view
-        model.life.observe(viewLifecycleOwner, { life ->
-            lifeCounter.text = life.toString()
-        })
-
         return view
+    }
+
+    fun updateText(text: String?) {
+        view!!.findViewById<TextView>(R.id.lifeCounter).text = text
     }
 
     companion object {
