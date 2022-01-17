@@ -7,10 +7,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import de.mtgCompanion.shared.model.Player
 
 private const val PLAYER_ID_ARG = "id"
 
@@ -52,8 +48,8 @@ class PlayerFragment : Fragment() {
         return view
     }
 
-    fun updateText(text: String?) {
-        view!!.findViewById<TextView>(R.id.lifeCounter).text = text
+    fun updateLifeCounter(newAmount: Int) {
+        view!!.findViewById<TextView>(R.id.lifeCounter).text = newAmount.toString()
     }
 
     companion object {

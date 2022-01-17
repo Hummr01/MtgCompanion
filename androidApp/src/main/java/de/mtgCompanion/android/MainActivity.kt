@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 
-class MainActivity : AppCompatActivity(), MenuFragment.TextClicked {
+class MainActivity : AppCompatActivity(), MenuFragment.ButtonClicked {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,8 +21,11 @@ class MainActivity : AppCompatActivity(), MenuFragment.TextClicked {
         }
     }
 
-    override fun sendText(text: String?, playerId: Int) {
-        val frag: PlayerFragment = supportFragmentManager.findFragmentById(playerId) as PlayerFragment
-        frag.updateText(text)
+    override fun updateLifeCounterForEachPlayer(text: Int) {
+        for (fragment in supportFragmentManager.fragments) {
+            if (fragment is PlayerFragment) {
+                fragment.updateLifeCounter(text)
+            }
+        }
     }
 }

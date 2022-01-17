@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import java.lang.ClassCastException
 
 
@@ -18,10 +17,10 @@ import java.lang.ClassCastException
  */
 class MenuFragment : Fragment() {
 
-    var mCallback: TextClicked? = null
+    var eventCallback: ButtonClicked? = null
 
-    interface TextClicked {
-        fun sendText(text: String?, playerId: Int)
+    interface ButtonClicked {
+        fun updateLifeCounterForEachPlayer(text: Int)
     }
 
     override fun onAttach(context: Context) {
@@ -29,8 +28,8 @@ class MenuFragment : Fragment() {
 
         // This makes sure that the container activity has implemented
         // the callback interface. If not, it throws an exception
-        mCallback = try {
-            context as TextClicked
+        eventCallback = try {
+            context as ButtonClicked
         } catch (e: ClassCastException) {
             throw ClassCastException(
                 context.toString()
@@ -40,7 +39,7 @@ class MenuFragment : Fragment() {
     }
 
     override fun onDetach() {
-        mCallback = null // => avoid leaking, thanks @Deepscorn
+        eventCallback = null // => avoid leaking, thanks @Deepscorn
         super.onDetach()
     }
 
@@ -55,6 +54,7 @@ class MenuFragment : Fragment() {
         view.findViewById<Button>(R.id.restart).setOnClickListener {
             //TODO: must trigger UI update
             MyApplication.appService.startNewGame()
+            eventCallback!!.updateLifeCounterForEachPlayer(MyApplication.appService.startLife)
         }
         view.findViewById<Button>(R.id.randomPlayer).setOnClickListener {
             MyApplication.appService.choosePlayerAtRandom()
@@ -68,10 +68,8 @@ class MenuFragment : Fragment() {
         }
         view.findViewById<Button>(R.id.startLife).setOnClickListener {
             //TODO: add variables
-//            model.setLife(40)
             MyApplication.appService.setPlayerStartLifeAmountTo(40)
-            mCallback!!.sendText("40", R.id.fragmentPlayerOne)
-            mCallback!!.sendText("40", R.id.fragmentPlayerTwo)
+            eventCallback!!.updateLifeCounterForEachPlayer(40)
         }
         return view
     }
