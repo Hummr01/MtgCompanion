@@ -56,7 +56,7 @@ class Player(var startLifeAmount: Int = 0) {
 
     // resets the counters to the default value
     fun resetCounters() {
-        lifeCounter.amount = 40
+        lifeCounter.amount = startLifeAmount
         poisonCounter.amount = 0
         experienceCounter.amount = 0
         energyCounter.amount = 0
