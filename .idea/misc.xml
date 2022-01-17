@@ -5,6 +5,7 @@
       <map>
         <entry key="androidApp/src/main/res/layout/activity_main.xml" value="0.33489583333333334" />
         <entry key="androidApp/src/main/res/layout/fragment_menu.xml" value="0.2125" />
+        <entry key="androidApp/src/main/res/layout/fragment_player.xml" value="0.33489583333333334" />
       </map>
     </option>
   </component>
