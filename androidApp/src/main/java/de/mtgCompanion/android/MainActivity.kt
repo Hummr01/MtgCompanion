@@ -21,11 +21,37 @@ class MainActivity : AppCompatActivity(), MenuFragment.ButtonClicked {
         }
     }
 
-    override fun updateLifeCounterForEachPlayer(text: Int) {
+    private fun updateLifeCounterForEachPlayer(newAmount: Int) {
         for (fragment in supportFragmentManager.fragments) {
             if (fragment is PlayerFragment) {
-                fragment.updateLifeCounter(text)
+                fragment.updateLifeCounter(newAmount)
             }
         }
+    }
+
+    override fun startNewGame() {
+        MyApplication.appService.startNewGame()
+        updateLifeCounterForEachPlayer(MyApplication.appService.startLife)
+    }
+
+    override fun setStartLifeAmount(newAmount: Int) {
+        MyApplication.appService.setPlayerStartLifeAmountTo(newAmount)
+        updateLifeCounterForEachPlayer(newAmount)
+    }
+
+    override fun pickRandomPlayer() {
+        val player = MyApplication.appService.choosePlayerAtRandom()
+        for (fragment in supportFragmentManager.fragments) {
+            if (fragment is PlayerFragment) {
+                if (MyApplication.appService.getPlayerByIndex(fragment.playerId) == player) {
+                    fragment.showPicked()
+                }
+            }
+        }
+    }
+
+    override fun setNumberOfPlayers(newPlayerCount: Int) {
+        MyApplication.appService.setNumberOfPlayers(newPlayerCount)
+        updateLifeCounterForEachPlayer(MyApplication.appService.startLife)
     }
 }

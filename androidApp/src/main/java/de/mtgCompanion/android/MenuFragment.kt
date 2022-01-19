@@ -20,7 +20,11 @@ class MenuFragment : Fragment() {
     var eventCallback: ButtonClicked? = null
 
     interface ButtonClicked {
-        fun updateLifeCounterForEachPlayer(text: Int)
+//        fun updateLifeCounterForEachPlayer(text: Int)
+        fun startNewGame()
+        fun setStartLifeAmount(newAmount: Int)
+        fun pickRandomPlayer()
+        fun setNumberOfPlayers(newPlayerCount: Int)
     }
 
     override fun onAttach(context: Context) {
@@ -39,7 +43,7 @@ class MenuFragment : Fragment() {
     }
 
     override fun onDetach() {
-        eventCallback = null // => avoid leaking, thanks @Deepscorn
+        eventCallback = null // => avoid leaking
         super.onDetach()
     }
 
@@ -52,24 +56,21 @@ class MenuFragment : Fragment() {
 
         // set Button on click listeners
         view.findViewById<Button>(R.id.restart).setOnClickListener {
-            //TODO: must trigger UI update
-            MyApplication.appService.startNewGame()
-            eventCallback!!.updateLifeCounterForEachPlayer(MyApplication.appService.startLife)
+            eventCallback!!.startNewGame()
         }
         view.findViewById<Button>(R.id.randomPlayer).setOnClickListener {
-            MyApplication.appService.choosePlayerAtRandom()
+            eventCallback!!.pickRandomPlayer()
         }
         view.findViewById<Button>(R.id.toggleVisibility).setOnClickListener {
             view.visibility = View.GONE
         }
         view.findViewById<Button>(R.id.numberOfPlayers).setOnClickListener {
             //TODO: add variables
-            MyApplication.appService.setNumberOfPlayers(2)
+            eventCallback!!.setNumberOfPlayers(2)
         }
         view.findViewById<Button>(R.id.startLife).setOnClickListener {
             //TODO: add variables
-            MyApplication.appService.setPlayerStartLifeAmountTo(40)
-            eventCallback!!.updateLifeCounterForEachPlayer(40)
+            eventCallback!!.setStartLifeAmount(40)
         }
         return view
     }

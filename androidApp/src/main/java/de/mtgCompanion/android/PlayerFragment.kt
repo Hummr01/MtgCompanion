@@ -1,11 +1,13 @@
 package de.mtgCompanion.android
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 
 private const val PLAYER_ID_ARG = "id"
@@ -16,7 +18,7 @@ private const val PLAYER_ID_ARG = "id"
  * create an instance of this fragment.
  */
 class PlayerFragment : Fragment() {
-    private var playerId: Int = -1
+    var playerId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,10 +41,14 @@ class PlayerFragment : Fragment() {
 
         // Add and subtract methods
         view.findViewById<Button>(R.id.subbtn).setOnClickListener {
-            lifeCounter.text = MyApplication.appService.getPlayerByIndex(playerId).alterPlayersLifeTotalBy(-1).toString()
+            lifeCounter.text =
+                MyApplication.appService.getPlayerByIndex(playerId).alterPlayersLifeTotalBy(-1)
+                    .toString()
         }
         view.findViewById<Button>(R.id.addbtn).setOnClickListener {
-            lifeCounter.text = MyApplication.appService.getPlayerByIndex(playerId).alterPlayersLifeTotalBy(1).toString()
+            lifeCounter.text =
+                MyApplication.appService.getPlayerByIndex(playerId).alterPlayersLifeTotalBy(1)
+                    .toString()
         }
 
         return view
@@ -50,6 +56,15 @@ class PlayerFragment : Fragment() {
 
     fun updateLifeCounter(newAmount: Int) {
         view!!.findViewById<TextView>(R.id.lifeCounter).text = newAmount.toString()
+    }
+
+    fun showPicked() {
+        view!!.setBackgroundColor(Color.parseColor("#F44336"))
+        view!!.postDelayed({
+            view!!.setBackgroundColor(
+                Color.parseColor("#FFFFFF")
+            )
+        }, 1000)
     }
 
     companion object {
