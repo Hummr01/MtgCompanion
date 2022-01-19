@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".MenuFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <Button
+                android:text="M"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/toggleMenu"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+                android:text="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button3"
+                app:layout_constraintCircle="@+id/toggleMenu"
+                app:layout_constraintCircleRadius="100dp"
+                app:layout_constraintCircleAngle="0"/>
+
+        <Button
+                android:text="2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button4"
+                app:layout_constraintCircle="@+id/toggleMenu"
+                app:layout_constraintCircleRadius="100dp"
+                app:layout_constraintCircleAngle="72"/>
+
+        <Button
+                android:text="3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button5"
+                app:layout_constraintCircle="@+id/toggleMenu"
+                app:layout_constraintCircleRadius="100dp"
+                app:layout_constraintCircleAngle="144" />
+
+        <Button
+                android:text="4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button6"
+                app:layout_constraintCircle="@+id/toggleMenu"
+                app:layout_constraintCircleRadius="100dp"
+                app:layout_constraintCircleAngle="216"/>
+        <Button
+                android:text="5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button7"
+                app:layout_constraintCircle="@+id/toggleMenu"
+                app:layout_constraintCircleRadius="100dp"
+                app:layout_constraintCircleAngle="288"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
