@@ -23,7 +23,6 @@ class MenuFragment : Fragment() {
     var eventCallback: ButtonClicked? = null
 
     interface ButtonClicked {
-        //        fun updateLifeCounterForEachPlayer(text: Int)
         fun startNewGame()
         fun setStartLifeAmount(newAmount: Int)
         fun pickRandomPlayer()
