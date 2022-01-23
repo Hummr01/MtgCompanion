@@ -21,47 +21,68 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-                android:text="1"
+                android:text="NEW"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button3"
+                android:id="@+id/restart"
+                android:animateLayoutChanges="true"
                 app:layout_constraintCircle="@+id/toggleMenu"
                 app:layout_constraintCircleRadius="100dp"
-                app:layout_constraintCircleAngle="0"/>
+                app:layout_constraintCircleAngle="0"
+                tools:layout_editor_absoluteX="162dp"
+                android:visibility="invisible"
+                tools:layout_editor_absoluteY="242dp" />
+
+        <Button
+                android:text="RNG"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/randomPlayer"
+                android:animateLayoutChanges="true"
+                app:layout_constraintCircle="@+id/toggleMenu"
+                app:layout_constraintCircleRadius="100dp"
+                app:layout_constraintCircleAngle="72"
+                android:visibility="invisible"
+                tools:layout_editor_absoluteY="311dp"
+                tools:layout_editor_absoluteX="257dp" />
 
         <Button
                 android:text="2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button4"
+                android:id="@+id/numberOfPlayers"
+                android:animateLayoutChanges="true"
                 app:layout_constraintCircle="@+id/toggleMenu"
                 app:layout_constraintCircleRadius="100dp"
-                app:layout_constraintCircleAngle="72"/>
+                app:layout_constraintCircleAngle="144"
+                android:visibility="invisible"
+                tools:layout_editor_absoluteX="221dp"
+                tools:layout_editor_absoluteY="423dp" />
 
         <Button
-                android:text="3"
+                android:text="HP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button5"
+                android:id="@+id/startLife"
+                android:animateLayoutChanges="true"
                 app:layout_constraintCircle="@+id/toggleMenu"
                 app:layout_constraintCircleRadius="100dp"
-                app:layout_constraintCircleAngle="144" />
+                app:layout_constraintCircleAngle="216"
+                android:visibility="invisible"
+                tools:layout_editor_absoluteY="423dp"
+                tools:layout_editor_absoluteX="103dp" />
 
         <Button
-                android:text="4"
+                android:text="FN"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button6"
+                android:id="@+id/features"
+                android:animateLayoutChanges="true"
                 app:layout_constraintCircle="@+id/toggleMenu"
                 app:layout_constraintCircleRadius="100dp"
-                app:layout_constraintCircleAngle="216"/>
-        <Button
-                android:text="5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/button7"
-                app:layout_constraintCircle="@+id/toggleMenu"
-                app:layout_constraintCircleRadius="100dp"
-                app:layout_constraintCircleAngle="288"/>
+                app:layout_constraintCircleAngle="288"
+                android:visibility="invisible"
+                tools:layout_editor_absoluteY="311dp"
+                tools:layout_editor_absoluteX="67dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
