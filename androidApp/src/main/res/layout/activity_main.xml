@@ -8,52 +8,33 @@
         android:visibility="visible">
 
 
-    <TableLayout
+    <androidx.fragment.app.FragmentContainerView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:id="@+id/fragmentPlayerOne"
+            tools:layout="@layout/fragment_player"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragmentPlayerTwo" />
 
-        <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
+    <androidx.fragment.app.FragmentContainerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/fragmentPlayerTwo"
+            tools:layout="@layout/fragment_player"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toTopOf="@+id/fragmentPlayerOne"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.fragment.app.FragmentContainerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/fragmentPlayerOne"
-                    tools:layout="@layout/fragment_player"
-                    android:layout_weight="1"/>
-        </TableRow>
-
-        <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:visibility="visible">
-
-            <androidx.fragment.app.FragmentContainerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/fragmentMenu"
-                    android:layout_weight="1"
-                    tools:layout="@layout/fragment_menu" />
-
-        </TableRow>
-
-        <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-
-            <androidx.fragment.app.FragmentContainerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/fragmentPlayerTwo"
-                    tools:layout="@layout/fragment_player"
-                    android:layout_weight="1" />
-        </TableRow>
-    </TableLayout>
+    <androidx.fragment.app.FragmentContainerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fragmentMenu"
+            android:layout_weight="1"
+            tools:layout="@layout/fragment_menu_circular"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

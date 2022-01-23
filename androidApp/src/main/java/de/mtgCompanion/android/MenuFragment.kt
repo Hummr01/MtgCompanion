@@ -23,7 +23,7 @@ class MenuFragment : Fragment() {
     var eventCallback: ButtonClicked? = null
 
     interface ButtonClicked {
-//        fun updateLifeCounterForEachPlayer(text: Int)
+        //        fun updateLifeCounterForEachPlayer(text: Int)
         fun startNewGame()
         fun setStartLifeAmount(newAmount: Int)
         fun pickRandomPlayer()
@@ -56,6 +56,8 @@ class MenuFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_menu_circular, container, false)
+
+        // find the Buttons
         val menu = view.findViewById<Button>(R.id.toggleMenu)
         val restart = view.findViewById<Button>(R.id.restart)
         val random = view.findViewById<Button>(R.id.randomPlayer)
@@ -67,13 +69,19 @@ class MenuFragment : Fragment() {
         menu.setOnClickListener {
             // create the animator for this view (the start radius is zero)
 
-            arrayOf(restart,random,playerNumber,life,features).forEach { item ->
+            arrayOf(restart, random, playerNumber, life, features).forEach { item ->
                 val animation: Animator
                 val radiusOpened = 100f
 
                 if (item.visibility == View.VISIBLE) {
                     // make visible
-                    animation = ViewAnimationUtils.createCircularReveal(item, item.width / 2, item.height / 2, radiusOpened, 0f)
+                    animation = ViewAnimationUtils.createCircularReveal(
+                        item,
+                        item.width / 2,
+                        item.height / 2,
+                        radiusOpened,
+                        0f
+                    )
 
                     // make the view invisible when the animation is done
                     animation.addListener(object : AnimatorListenerAdapter() {
@@ -84,7 +92,13 @@ class MenuFragment : Fragment() {
                     })
                 } else {
                     // make visible
-                    animation = ViewAnimationUtils.createCircularReveal(item, item.width / 2, item.height / 2, 0f, radiusOpened)
+                    animation = ViewAnimationUtils.createCircularReveal(
+                        item,
+                        item.width / 2,
+                        item.height / 2,
+                        0f,
+                        radiusOpened
+                    )
                     item.visibility = View.VISIBLE
                 }
 
@@ -93,7 +107,7 @@ class MenuFragment : Fragment() {
             }
         }
 
-
+        // set onClick methods for the buttons
         restart.setOnClickListener {
             eventCallback!!.startNewGame()
         }
@@ -108,11 +122,8 @@ class MenuFragment : Fragment() {
             //TODO: add variables
             eventCallback!!.setStartLifeAmount(40)
         }
+
         return view
-    }
-
-    private fun animateVisibility(item: View, radiusOpened: Float) {
-
     }
 
     companion object {
