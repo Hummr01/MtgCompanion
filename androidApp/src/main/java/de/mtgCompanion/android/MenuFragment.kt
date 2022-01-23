@@ -11,7 +11,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import java.lang.ClassCastException
 import android.view.ViewAnimationUtils
-
+import kotlin.math.hypot
 
 /**
  * A simple [Fragment] subclass.
@@ -58,72 +58,88 @@ class MenuFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_menu_circular, container, false)
 
         // find the Buttons
-        val menu = view.findViewById<Button>(R.id.toggleMenu)
-        val restart = view.findViewById<Button>(R.id.restart)
-        val random = view.findViewById<Button>(R.id.randomPlayer)
-        val playerNumber = view.findViewById<Button>(R.id.numberOfPlayers)
-        val life = view.findViewById<Button>(R.id.startLife)
-        val features = view.findViewById<Button>(R.id.features)
-
-        // set Button on click listeners
-        menu.setOnClickListener {
-            // create the animator for this view (the start radius is zero)
-
-            arrayOf(restart, random, playerNumber, life, features).forEach { item ->
-                val animation: Animator
-                val radiusOpened = 100f
-
-                if (item.visibility == View.VISIBLE) {
-                    // make visible
-                    animation = ViewAnimationUtils.createCircularReveal(
-                        item,
-                        item.width / 2,
-                        item.height / 2,
-                        radiusOpened,
-                        0f
-                    )
-
-                    // make the view invisible when the animation is done
-                    animation.addListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator) {
-                            super.onAnimationEnd(animation)
-                            item.visibility = View.INVISIBLE
-                        }
-                    })
-                } else {
-                    // make visible
-                    animation = ViewAnimationUtils.createCircularReveal(
-                        item,
-                        item.width / 2,
-                        item.height / 2,
-                        0f,
-                        radiusOpened
-                    )
-                    item.visibility = View.VISIBLE
-                }
-
-                // start the animation
-                animation.start()
-            }
-        }
+        val menuButton = view.findViewById<Button>(R.id.toggleMenu)
+        val restartButton = view.findViewById<Button>(R.id.restart)
+        val randomPlayerButton = view.findViewById<Button>(R.id.randomPlayer)
+        val numberOfPlayersButton = view.findViewById<Button>(R.id.numberOfPlayers)
+        val startLifeButton = view.findViewById<Button>(R.id.startLife)
+        val cardSearchButton = view.findViewById<Button>(R.id.features)
 
         // set onClick methods for the buttons
-        restart.setOnClickListener {
+        // Menu
+        menuButton.setOnClickListener {
+            arrayOf(
+                restartButton,
+                randomPlayerButton,
+                numberOfPlayersButton,
+                startLifeButton,
+                cardSearchButton
+            ).forEach { item ->
+                animateVisibility(item)
+            }
+        }
+        // restart round
+        restartButton.setOnClickListener {
             eventCallback!!.startNewGame()
         }
-        random.setOnClickListener {
+        // select random player
+        randomPlayerButton.setOnClickListener {
             eventCallback!!.pickRandomPlayer()
         }
-        playerNumber.setOnClickListener {
+        // set number of players
+        numberOfPlayersButton.setOnClickListener {
             //TODO: add variables
             eventCallback!!.setNumberOfPlayers(2)
         }
-        life.setOnClickListener {
+        // set start life amount
+        startLifeButton.setOnClickListener {
             //TODO: add variables
             eventCallback!!.setStartLifeAmount(40)
         }
 
         return view
+    }
+
+    private fun animateVisibility(item: View) {
+        val animation: Animator
+        val centerX = item.width / 2
+        val centerY = item.height / 2
+
+        // get the initial radius for the clipping circle
+        val radiusOpened = hypot(centerX.toDouble(), centerY.toDouble()).toFloat()
+
+        if (item.visibility == View.VISIBLE) {
+            // make visible
+            animation = ViewAnimationUtils.createCircularReveal(
+                item,
+                centerX,
+                centerY,
+                radiusOpened,
+                0f
+            )
+
+            // make the view invisible when the animation is done
+            animation.addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    super.onAnimationEnd(animation)
+                    item.visibility = View.INVISIBLE
+                }
+            })
+        } else {
+            // make visible
+            animation = ViewAnimationUtils.createCircularReveal(
+                item,
+                centerX,
+                centerY,
+                0f,
+                radiusOpened
+            )
+
+            item.visibility = View.VISIBLE
+        }
+
+        // start the animation
+        animation.start()
     }
 
     companion object {
