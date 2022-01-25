@@ -14,13 +14,17 @@ import android.view.ViewAnimationUtils
 import kotlin.math.hypot
 
 /**
- * A simple [Fragment] subclass.
- * Use the [MenuFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * The main menu [Fragment]
+ *
+ * Pick start player, start life, number of players,
+ *
+ * Shows or hides the menu.
+ * Backdrop click is possible to hide the menu.
  */
-class MenuFragment : Fragment() {
+class MainMenuFragment : Fragment() {
 
-    var eventCallback: ButtonClicked? = null
+    private var eventCallback: ButtonClicked? = null
+    private var visible: Boolean = false
 
     interface ButtonClicked {
         fun startNewGame()
@@ -68,13 +72,17 @@ class MenuFragment : Fragment() {
         view.setOnClickListener {
             // only clickable while menu is visible
             // hides the menu on backdrop click
-            toggleVisibilityOfMenu()
+            hideMenu()
         }
 
         // set onClick methods for the buttons
         // Menu
         menuButton.setOnClickListener {
-            toggleVisibilityOfMenu()
+            if (visible) {
+                hideMenu()
+            } else {
+                showMenu()
+            }
         }
         // restart round
         restartButton.setOnClickListener {
@@ -98,18 +106,61 @@ class MenuFragment : Fragment() {
             //TODO: Implement it!
         }
 
-        // set initially to false. The View should only be clickable while menu is visible
-        view.isClickable = false
-        view.isFocusable = false
-
         return view
     }
 
-    /**
-     * toggles the visibility of the menu Buttons and animates it
-     * DO NOT USE BEFORE VIEW HAS BEEN CREATED
-     */
-    private fun toggleVisibilityOfMenu() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // set initially to false. The View should only be clickable while menu is visible
+        changeMenuVisibilityTo(false)
+    }
+
+    private fun showMenu() {
+        if (visible) {
+            // already visible
+            return
+        }
+        arrayListOf<View>(
+            view!!.findViewById(R.id.restart),
+            view!!.findViewById(R.id.randomPlayer),
+            view!!.findViewById(R.id.numberOfPlayers),
+            view!!.findViewById(R.id.startLife),
+            view!!.findViewById(R.id.features)
+        ).forEach { item ->
+            if (item.visibility == View.VISIBLE) {
+                // make invisible
+                hideMenu()
+            } else {
+                val animation: Animator
+                val centerX = item.width / 2
+                val centerY = item.height / 2
+
+                // get the initial radius for the clipping circle
+                val radiusOpened = hypot(centerX.toDouble(), centerY.toDouble()).toFloat()
+                // make visible
+                animation = ViewAnimationUtils.createCircularReveal(
+                    item,
+                    centerX,
+                    centerY,
+                    0f,
+                    radiusOpened
+                )
+
+                item.visibility = View.VISIBLE
+                // start the animation
+                animation.start()
+            }
+        }
+
+        // toggle the clickable state. View should only be clickable while menu is visible.
+        changeMenuVisibilityTo(true)
+    }
+
+    private fun hideMenu() {
+        if (!visible) {
+            // already hidden
+            return
+        }
         arrayListOf<View>(
             view!!.findViewById(R.id.restart),
             view!!.findViewById(R.id.randomPlayer),
@@ -124,42 +175,35 @@ class MenuFragment : Fragment() {
             // get the initial radius for the clipping circle
             val radiusOpened = hypot(centerX.toDouble(), centerY.toDouble()).toFloat()
 
-            if (item.visibility == View.VISIBLE) {
-                // make invisible
-                animation = ViewAnimationUtils.createCircularReveal(
-                    item,
-                    centerX,
-                    centerY,
-                    radiusOpened,
-                    0f
-                )
+            // make invisible
+            animation = ViewAnimationUtils.createCircularReveal(
+                item,
+                centerX,
+                centerY,
+                radiusOpened,
+                0f
+            )
 
-                // make the view invisible when the animation is done
-                animation.addListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator) {
-                        super.onAnimationEnd(animation)
-                        item.visibility = View.INVISIBLE
-                    }
-                })
-            } else {
-                // make visible
-                animation = ViewAnimationUtils.createCircularReveal(
-                    item,
-                    centerX,
-                    centerY,
-                    0f,
-                    radiusOpened
-                )
-
-                item.visibility = View.VISIBLE
-            }
+            // make the view invisible when the animation is done
+            animation.addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    super.onAnimationEnd(animation)
+                    item.visibility = View.INVISIBLE
+                }
+            })
 
             // start the animation
             animation.start()
         }
 
         // toggle the clickable state. View should only be clickable while menu is visible.
-        this.view!!.isClickable = !this.view!!.isClickable
+        changeMenuVisibilityTo(false)
+    }
+
+    private fun changeMenuVisibilityTo(visibility: Boolean) {
+        visible = visibility
+        view!!.isClickable = visible
+        view!!.isFocusable = visible
     }
 
     companion object {
@@ -169,6 +213,6 @@ class MenuFragment : Fragment() {
          * @return A new instance of fragment menuFragment.
          */
         @JvmStatic
-        fun newInstance() = MenuFragment()
+        fun newInstance() = MainMenuFragment()
     }
 }

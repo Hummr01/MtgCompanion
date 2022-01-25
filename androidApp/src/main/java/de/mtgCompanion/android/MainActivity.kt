@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 
-class MainActivity : AppCompatActivity(), MenuFragment.ButtonClicked {
+class MainActivity : AppCompatActivity(), MainMenuFragment.ButtonClicked {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity(), MenuFragment.ButtonClicked {
                 setReorderingAllowed(true)
                 add(R.id.fragmentPlayerOne, PlayerFragment.newInstance(0))
                 add(R.id.fragmentPlayerTwo, PlayerFragment.newInstance(1))
-                add(R.id.fragmentMenu, MenuFragment.newInstance())
+                add(R.id.fragmentMenu, MainMenuFragment.newInstance())
             }
         }
     }

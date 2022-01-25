@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:ignore="MissingConstraints"
-        tools:context=".MenuFragment">
+        tools:context=".MainMenuFragment">
 
     <Button
             android:text="M"
