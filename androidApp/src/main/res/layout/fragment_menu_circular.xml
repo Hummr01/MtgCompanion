@@ -1,88 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:ignore="MissingConstraints"
         tools:context=".MenuFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <Button
+            android:text="M"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toggleMenu"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-                android:text="M"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/toggleMenu"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+    <Button
+            android:text="NEW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/restart"
+            android:animateLayoutChanges="true"
+            app:layout_constraintCircle="@+id/toggleMenu"
+            app:layout_constraintCircleRadius="100dp"
+            app:layout_constraintCircleAngle="0"
+            tools:layout_editor_absoluteX="162dp"
+            android:visibility="invisible"
+            tools:layout_editor_absoluteY="242dp" />
 
-        <Button
-                android:text="NEW"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/restart"
-                android:animateLayoutChanges="true"
-                app:layout_constraintCircle="@+id/toggleMenu"
-                app:layout_constraintCircleRadius="100dp"
-                app:layout_constraintCircleAngle="0"
-                tools:layout_editor_absoluteX="162dp"
-                android:visibility="invisible"
-                tools:layout_editor_absoluteY="242dp" />
+    <Button
+            android:text="RNG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/randomPlayer"
+            android:animateLayoutChanges="true"
+            app:layout_constraintCircle="@+id/toggleMenu"
+            app:layout_constraintCircleRadius="100dp"
+            app:layout_constraintCircleAngle="72"
+            android:visibility="invisible"
+            tools:layout_editor_absoluteY="311dp"
+            tools:layout_editor_absoluteX="257dp" />
 
-        <Button
-                android:text="RNG"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/randomPlayer"
-                android:animateLayoutChanges="true"
-                app:layout_constraintCircle="@+id/toggleMenu"
-                app:layout_constraintCircleRadius="100dp"
-                app:layout_constraintCircleAngle="72"
-                android:visibility="invisible"
-                tools:layout_editor_absoluteY="311dp"
-                tools:layout_editor_absoluteX="257dp" />
+    <Button
+            android:text="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/numberOfPlayers"
+            android:animateLayoutChanges="true"
+            app:layout_constraintCircle="@+id/toggleMenu"
+            app:layout_constraintCircleRadius="100dp"
+            app:layout_constraintCircleAngle="144"
+            android:visibility="invisible"
+            tools:layout_editor_absoluteX="221dp"
+            tools:layout_editor_absoluteY="423dp" />
 
-        <Button
-                android:text="2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/numberOfPlayers"
-                android:animateLayoutChanges="true"
-                app:layout_constraintCircle="@+id/toggleMenu"
-                app:layout_constraintCircleRadius="100dp"
-                app:layout_constraintCircleAngle="144"
-                android:visibility="invisible"
-                tools:layout_editor_absoluteX="221dp"
-                tools:layout_editor_absoluteY="423dp" />
+    <Button
+            android:text="HP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/startLife"
+            android:animateLayoutChanges="true"
+            app:layout_constraintCircle="@+id/toggleMenu"
+            app:layout_constraintCircleRadius="100dp"
+            app:layout_constraintCircleAngle="216"
+            android:visibility="invisible"
+            tools:layout_editor_absoluteY="423dp"
+            tools:layout_editor_absoluteX="103dp" />
 
-        <Button
-                android:text="HP"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/startLife"
-                android:animateLayoutChanges="true"
-                app:layout_constraintCircle="@+id/toggleMenu"
-                app:layout_constraintCircleRadius="100dp"
-                app:layout_constraintCircleAngle="216"
-                android:visibility="invisible"
-                tools:layout_editor_absoluteY="423dp"
-                tools:layout_editor_absoluteX="103dp" />
-
-        <Button
-                android:text="FN"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/features"
-                android:animateLayoutChanges="true"
-                app:layout_constraintCircle="@+id/toggleMenu"
-                app:layout_constraintCircleRadius="100dp"
-                app:layout_constraintCircleAngle="288"
-                android:visibility="invisible"
-                tools:layout_editor_absoluteY="311dp"
-                tools:layout_editor_absoluteX="67dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+    <Button
+            android:text="FN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/features"
+            android:animateLayoutChanges="true"
+            app:layout_constraintCircle="@+id/toggleMenu"
+            app:layout_constraintCircleRadius="100dp"
+            app:layout_constraintCircleAngle="288"
+            android:visibility="invisible"
+            tools:layout_editor_absoluteY="311dp"
+            tools:layout_editor_absoluteX="67dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
