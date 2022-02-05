@@ -121,35 +121,30 @@ class MainMenuFragment : Fragment() {
             return
         }
         arrayListOf<View>(
-            view!!.findViewById(R.id.restart),
-            view!!.findViewById(R.id.randomPlayer),
-            view!!.findViewById(R.id.numberOfPlayers),
-            view!!.findViewById(R.id.startLife),
-            view!!.findViewById(R.id.features)
+            requireView().findViewById(R.id.restart),
+            requireView().findViewById(R.id.randomPlayer),
+            requireView().findViewById(R.id.numberOfPlayers),
+            requireView().findViewById(R.id.startLife),
+            requireView().findViewById(R.id.features)
         ).forEach { item ->
-            if (item.visibility == View.VISIBLE) {
-                // make invisible
-                hideMenu()
-            } else {
-                val animation: Animator
-                val centerX = item.width / 2
-                val centerY = item.height / 2
+            val animation: Animator
+            val centerX = item.width / 2
+            val centerY = item.height / 2
 
-                // get the initial radius for the clipping circle
-                val radiusOpened = hypot(centerX.toDouble(), centerY.toDouble()).toFloat()
-                // make visible
-                animation = ViewAnimationUtils.createCircularReveal(
-                    item,
-                    centerX,
-                    centerY,
-                    0f,
-                    radiusOpened
-                )
+            // get the initial radius for the clipping circle
+            val radiusOpened = hypot(centerX.toDouble(), centerY.toDouble()).toFloat()
+            // make visible
+            animation = ViewAnimationUtils.createCircularReveal(
+                item,
+                centerX,
+                centerY,
+                0f,
+                radiusOpened
+            )
 
-                item.visibility = View.VISIBLE
-                // start the animation
-                animation.start()
-            }
+            item.visibility = View.VISIBLE
+            // start the animation
+            animation.start()
         }
 
         // toggle the clickable state. View should only be clickable while menu is visible.
@@ -162,11 +157,11 @@ class MainMenuFragment : Fragment() {
             return
         }
         arrayListOf<View>(
-            view!!.findViewById(R.id.restart),
-            view!!.findViewById(R.id.randomPlayer),
-            view!!.findViewById(R.id.numberOfPlayers),
-            view!!.findViewById(R.id.startLife),
-            view!!.findViewById(R.id.features)
+            requireView().findViewById(R.id.restart),
+            requireView().findViewById(R.id.randomPlayer),
+            requireView().findViewById(R.id.numberOfPlayers),
+            requireView().findViewById(R.id.startLife),
+            requireView().findViewById(R.id.features)
         ).forEach { item ->
             val animation: Animator
             val centerX = item.width / 2
@@ -202,8 +197,8 @@ class MainMenuFragment : Fragment() {
 
     private fun changeMenuVisibilityTo(visibility: Boolean) {
         visible = visibility
-        view!!.isClickable = visible
-        view!!.isFocusable = visible
+        requireView().isClickable = visible
+        requireView().isFocusable = visible
     }
 
     companion object {
