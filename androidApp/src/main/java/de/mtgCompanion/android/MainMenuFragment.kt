@@ -1,17 +1,18 @@
 package de.mtgCompanion.android
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
+import android.animation.ValueAnimator
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.LinearInterpolator
+import android.view.animation.ScaleAnimation
 import android.widget.Button
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import java.lang.ClassCastException
-import android.view.ViewAnimationUtils
-import kotlin.math.hypot
+
 
 /**
  * The main menu [Fragment]
@@ -75,9 +76,22 @@ class MainMenuFragment : Fragment() {
             hideMenu()
         }
 
+//        val anim = ValueAnimator.ofInt(150, 300)
+//        anim.addUpdateListener { valueAnimator ->
+//            val `val` = valueAnimator.animatedValue as Int
+//            val layoutParams = menuButton.layoutParams as ConstraintLayout.LayoutParams
+//            layoutParams.circleRadius = `val`
+//            menuButton.layoutParams = layoutParams
+//        }
+////            anim.duration = duration
+//        anim.interpolator = LinearInterpolator()
+//        anim.repeatMode = ValueAnimator.REVERSE
+//        anim.repeatCount = ValueAnimator.INFINITE
+
         // set onClick methods for the buttons
         // Menu
         menuButton.setOnClickListener {
+//            anim.start()
             if (visible) {
                 hideMenu()
             } else {
@@ -127,24 +141,8 @@ class MainMenuFragment : Fragment() {
             requireView().findViewById(R.id.startLife),
             requireView().findViewById(R.id.features)
         ).forEach { item ->
-            val animation: Animator
-            val centerX = item.width / 2
-            val centerY = item.height / 2
-
-            // get the initial radius for the clipping circle
-            val radiusOpened = hypot(centerX.toDouble(), centerY.toDouble()).toFloat()
-            // make visible
-            animation = ViewAnimationUtils.createCircularReveal(
-                item,
-                centerX,
-                centerY,
-                0f,
-                radiusOpened
-            )
-
             item.visibility = View.VISIBLE
-            // start the animation
-            animation.start()
+            animateCircleMenu(item)
         }
 
         // toggle the clickable state. View should only be clickable while menu is visible.
@@ -163,36 +161,59 @@ class MainMenuFragment : Fragment() {
             requireView().findViewById(R.id.startLife),
             requireView().findViewById(R.id.features)
         ).forEach { item ->
-            val animation: Animator
-            val centerX = item.width / 2
-            val centerY = item.height / 2
-
-            // get the initial radius for the clipping circle
-            val radiusOpened = hypot(centerX.toDouble(), centerY.toDouble()).toFloat()
-
-            // make invisible
-            animation = ViewAnimationUtils.createCircularReveal(
-                item,
-                centerX,
-                centerY,
-                radiusOpened,
-                0f
-            )
-
-            // make the view invisible when the animation is done
-            animation.addListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: Animator) {
-                    super.onAnimationEnd(animation)
-                    item.visibility = View.INVISIBLE
-                }
-            })
-
-            // start the animation
-            animation.start()
+            item.visibility = View.INVISIBLE
+            animateCircleMenu(item)
         }
 
         // toggle the clickable state. View should only be clickable while menu is visible.
         changeMenuVisibilityTo(false)
+    }
+
+    // handles the animation of the circle menu
+    private fun animateCircleMenu(item: View) {
+        val duration = 300L
+        val radius = 250
+
+        // from hidden to visible
+        var startRadius = 0
+        var endRadius = radius
+        var startScale = 0f
+        var endScale = 1f
+
+        // from visible to hidden
+        if (visible) {
+            startRadius = radius
+            endRadius = 0
+            startScale = 1f
+            endScale = 0f
+        }
+
+        // define scale animation
+        val scaleAnimation = ScaleAnimation(
+            startScale, endScale,
+            startScale, endScale,
+            Animation.RELATIVE_TO_SELF, 0.5f,
+            Animation.RELATIVE_TO_SELF, 0.5f
+        )
+
+        // define radius animation
+        val radiusAnim = ValueAnimator.ofInt(startRadius, endRadius)
+        radiusAnim.addUpdateListener { valueAnimator ->
+            val value = valueAnimator.animatedValue as Int
+            val layoutParams = item.layoutParams as ConstraintLayout.LayoutParams
+            layoutParams.circleRadius = value
+            item.layoutParams = layoutParams
+        }
+
+        // set duration an interpolation of animation
+        scaleAnimation.duration = duration
+        scaleAnimation.interpolator = LinearInterpolator()
+        radiusAnim.duration = duration
+        radiusAnim.interpolator = LinearInterpolator()
+
+        // start animation
+        radiusAnim.start()
+        item.startAnimation(scaleAnimation)
     }
 
     private fun changeMenuVisibilityTo(visibility: Boolean) {
