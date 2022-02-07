@@ -171,7 +171,7 @@ class MainMenuFragment : Fragment() {
 
     // handles the animation of the circle menu
     private fun animateCircleMenu(item: View) {
-        val duration = 300L
+        val duration = 200L
         val radius = 250
 
         // from hidden to visible
