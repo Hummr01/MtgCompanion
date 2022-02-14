@@ -17,6 +17,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+    <androidx.constraintlayout.widget.Group
+            android:id="@+id/mainMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:constraint_referenced_ids="restart,randomPlayer,numberOfPlayers,startLife,features" />
+
     <Button
             android:text="NEW"
             android:layout_width="50dp"
@@ -25,7 +32,6 @@
             app:layout_constraintCircle="@+id/toggleMenu"
             app:layout_constraintCircleRadius="0dp"
             app:layout_constraintCircleAngle="0"
-            android:visibility="invisible"
             tools:layout_editor_absoluteY="342dp"
             tools:layout_editor_absoluteX="162dp" />
 
@@ -37,7 +43,6 @@
             app:layout_constraintCircle="@+id/toggleMenu"
             app:layout_constraintCircleRadius="0dp"
             app:layout_constraintCircleAngle="72"
-            android:visibility="invisible"
             tools:layout_editor_absoluteY="342dp"
             tools:layout_editor_absoluteX="162dp" />
 
@@ -49,7 +54,6 @@
             app:layout_constraintCircle="@+id/toggleMenu"
             app:layout_constraintCircleRadius="0dp"
             app:layout_constraintCircleAngle="144"
-            android:visibility="invisible"
             tools:layout_editor_absoluteY="342dp"
             tools:layout_editor_absoluteX="162dp" />
 
@@ -61,7 +65,6 @@
             app:layout_constraintCircle="@+id/toggleMenu"
             app:layout_constraintCircleRadius="0dp"
             app:layout_constraintCircleAngle="216"
-            android:visibility="invisible"
             tools:layout_editor_absoluteY="342dp"
             tools:layout_editor_absoluteX="162dp" />
 
@@ -73,7 +76,6 @@
             app:layout_constraintCircle="@+id/toggleMenu"
             app:layout_constraintCircleRadius="0dp"
             app:layout_constraintCircleAngle="288"
-            android:visibility="invisible"
             tools:layout_editor_absoluteY="342dp"
             tools:layout_editor_absoluteX="162dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

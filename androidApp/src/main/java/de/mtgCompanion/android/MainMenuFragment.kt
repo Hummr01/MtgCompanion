@@ -2,6 +2,7 @@ package de.mtgCompanion.android
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import android.view.animation.LinearInterpolator
 import android.view.animation.ScaleAnimation
 import android.widget.Button
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.Group
 import androidx.fragment.app.Fragment
 
 
@@ -23,9 +25,7 @@ import androidx.fragment.app.Fragment
  * Backdrop click is possible to hide the menu.
  */
 class MainMenuFragment : Fragment() {
-
     private var eventCallback: ButtonClicked? = null
-    private var visible: Boolean = false
 
     interface ButtonClicked {
         fun startNewGame()
@@ -69,34 +69,16 @@ class MainMenuFragment : Fragment() {
         val startLifeButton = view.findViewById<Button>(R.id.startLife)
         val cardSearchButton = view.findViewById<Button>(R.id.features)
 
-        // set onClick for View to enable backdrop click
+        // set onClick for View to hide menu on backdrop click
         view.setOnClickListener {
             // only clickable while menu is visible
-            // hides the menu on backdrop click
-            hideMenu()
+            toggleMenuVisibility()
         }
-
-//        val anim = ValueAnimator.ofInt(150, 300)
-//        anim.addUpdateListener { valueAnimator ->
-//            val `val` = valueAnimator.animatedValue as Int
-//            val layoutParams = menuButton.layoutParams as ConstraintLayout.LayoutParams
-//            layoutParams.circleRadius = `val`
-//            menuButton.layoutParams = layoutParams
-//        }
-////            anim.duration = duration
-//        anim.interpolator = LinearInterpolator()
-//        anim.repeatMode = ValueAnimator.REVERSE
-//        anim.repeatCount = ValueAnimator.INFINITE
 
         // set onClick methods for the buttons
         // Menu
         menuButton.setOnClickListener {
-//            anim.start()
-            if (visible) {
-                hideMenu()
-            } else {
-                showMenu()
-            }
+            toggleMenuVisibility()
         }
         // restart round
         restartButton.setOnClickListener {
@@ -125,52 +107,40 @@ class MainMenuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // set initially to false. The View should only be clickable while menu is visible
-        changeMenuVisibilityTo(false)
+        // hide menu
+        requireView().findViewById<Group>(R.id.mainMenu).visibility = View.INVISIBLE
+
+        // transparent background when menu is open
+        view.setBackgroundColor(Color.WHITE)
+        view.background.alpha = 0
+
+        // The View should only be clickable while menu is visible
+        requireView().isClickable = false
+        requireView().isFocusable = false
     }
 
-    private fun showMenu() {
-        if (visible) {
-            // already visible
-            return
-        }
-        arrayListOf<View>(
-            requireView().findViewById(R.id.restart),
-            requireView().findViewById(R.id.randomPlayer),
-            requireView().findViewById(R.id.numberOfPlayers),
-            requireView().findViewById(R.id.startLife),
-            requireView().findViewById(R.id.features)
-        ).forEach { item ->
-            item.visibility = View.VISIBLE
-            animateCircleMenu(item)
-        }
+    private fun toggleMenuVisibility() {
+        val mainMenu = requireView().findViewById<Group>(R.id.mainMenu)
+
+        animateCircleMenu(mainMenu.referencedIds)
 
         // toggle the clickable state. View should only be clickable while menu is visible.
-        changeMenuVisibilityTo(true)
-    }
-
-    private fun hideMenu() {
-        if (!visible) {
-            // already hidden
-            return
+        if (mainMenu.visibility == View.VISIBLE) {
+            requireView().background.alpha = 0
+            mainMenu.visibility = View.INVISIBLE
+            requireView().isClickable = false
+            requireView().isFocusable = false
+        } else {
+            // alpha value to darken the background
+            requireView().background.alpha = 140
+            mainMenu.visibility = View.VISIBLE
+            requireView().isClickable = true
+            requireView().isFocusable = true
         }
-        arrayListOf<View>(
-            requireView().findViewById(R.id.restart),
-            requireView().findViewById(R.id.randomPlayer),
-            requireView().findViewById(R.id.numberOfPlayers),
-            requireView().findViewById(R.id.startLife),
-            requireView().findViewById(R.id.features)
-        ).forEach { item ->
-            item.visibility = View.INVISIBLE
-            animateCircleMenu(item)
-        }
-
-        // toggle the clickable state. View should only be clickable while menu is visible.
-        changeMenuVisibilityTo(false)
     }
 
     // handles the animation of the circle menu
-    private fun animateCircleMenu(item: View) {
+    private fun animateCircleMenu(viewIdArray: IntArray) {
         val duration = 200L
         val radius = 250
 
@@ -181,45 +151,43 @@ class MainMenuFragment : Fragment() {
         var endScale = 1f
 
         // from visible to hidden
-        if (visible) {
+        if (requireView().findViewById<Group>(R.id.mainMenu).visibility == View.VISIBLE) {
             startRadius = radius
             endRadius = 0
             startScale = 1f
             endScale = 0f
         }
 
-        // define scale animation
-        val scaleAnimation = ScaleAnimation(
-            startScale, endScale,
-            startScale, endScale,
-            Animation.RELATIVE_TO_SELF, 0.5f,
-            Animation.RELATIVE_TO_SELF, 0.5f
-        )
+        viewIdArray.forEach {
+            val view = requireView().findViewById<View>(it)
 
-        // define radius animation
-        val radiusAnim = ValueAnimator.ofInt(startRadius, endRadius)
-        radiusAnim.addUpdateListener { valueAnimator ->
-            val value = valueAnimator.animatedValue as Int
-            val layoutParams = item.layoutParams as ConstraintLayout.LayoutParams
-            layoutParams.circleRadius = value
-            item.layoutParams = layoutParams
+            // define scale animation
+            val scaleAnimation = ScaleAnimation(
+                startScale, endScale,
+                startScale, endScale,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f
+            )
+            scaleAnimation.duration = duration
+            scaleAnimation.interpolator = LinearInterpolator()
+
+            // define radius animation
+            val radiusAnim = ValueAnimator.ofInt(startRadius, endRadius)
+            radiusAnim.addUpdateListener { valueAnimator ->
+                val value = valueAnimator.animatedValue as Int
+                val layoutParams = view.layoutParams as ConstraintLayout.LayoutParams
+                layoutParams.circleRadius = value
+                view.layoutParams = layoutParams
+            }
+
+            // set duration an interpolation of animation
+            radiusAnim.duration = duration
+            radiusAnim.interpolator = LinearInterpolator()
+
+            // start animation
+            radiusAnim.start()
+            view.startAnimation(scaleAnimation)
         }
-
-        // set duration an interpolation of animation
-        scaleAnimation.duration = duration
-        scaleAnimation.interpolator = LinearInterpolator()
-        radiusAnim.duration = duration
-        radiusAnim.interpolator = LinearInterpolator()
-
-        // start animation
-        radiusAnim.start()
-        item.startAnimation(scaleAnimation)
-    }
-
-    private fun changeMenuVisibilityTo(visibility: Boolean) {
-        visible = visibility
-        requireView().isClickable = visible
-        requireView().isFocusable = visible
     }
 
     companion object {
