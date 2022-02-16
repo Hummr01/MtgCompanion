@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -40,12 +41,12 @@ class PlayerFragment : Fragment() {
         lifeCounter.text = player.lifeCounter.amount.toString()
 
         // Add and subtract methods
-        view.findViewById<Button>(R.id.subbtn).setOnClickListener {
+        view.findViewById<ImageView>(R.id.subbtn).setOnClickListener {
             lifeCounter.text =
                 MyApplication.appService.getPlayerByIndex(playerId).alterPlayersLifeTotalBy(-1)
                     .toString()
         }
-        view.findViewById<Button>(R.id.addbtn).setOnClickListener {
+        view.findViewById<ImageView>(R.id.addbtn).setOnClickListener {
             lifeCounter.text =
                 MyApplication.appService.getPlayerByIndex(playerId).alterPlayersLifeTotalBy(1)
                     .toString()
@@ -55,13 +56,13 @@ class PlayerFragment : Fragment() {
     }
 
     fun updateLifeCounter(newAmount: Int) {
-        view!!.findViewById<TextView>(R.id.lifeCounter).text = newAmount.toString()
+        requireView().findViewById<TextView>(R.id.lifeCounter).text = newAmount.toString()
     }
 
     fun showPicked() {
-        view!!.setBackgroundColor(Color.parseColor("#F44336"))
-        view!!.postDelayed({
-            view!!.setBackgroundColor(
+        requireView().setBackgroundColor(Color.parseColor("#F44336"))
+        requireView().postDelayed({
+            requireView().setBackgroundColor(
                 Color.parseColor("#FFFFFF")
             )
         }, 1000)

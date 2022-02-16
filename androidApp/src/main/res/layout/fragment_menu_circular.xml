@@ -7,11 +7,11 @@
         tools:ignore="MissingConstraints"
         tools:context=".MainMenuFragment">
 
-    <Button
-            android:text="M"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/toggleMenu"
+    <ImageView
+            android:src="@drawable/menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/menu"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -22,60 +22,62 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="invisible"
-            app:constraint_referenced_ids="restart,randomPlayer,numberOfPlayers,startLife,features" />
+            app:constraint_referenced_ids="restart,randomPlayer,numberOfPlayers,startLife,search" />
 
-    <Button
-            android:text="NEW"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+    <ImageView
+            android:src="@drawable/restart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/restart"
-            app:layout_constraintCircle="@+id/toggleMenu"
+            app:layout_constraintCircle="@+id/menu"
             app:layout_constraintCircleRadius="0dp"
             app:layout_constraintCircleAngle="0"
-            tools:layout_editor_absoluteY="342dp"
-            tools:layout_editor_absoluteX="162dp" />
+            tools:layout_editor_absoluteY="353dp"
+            tools:layout_editor_absoluteX="193dp" />
 
-    <Button
-            android:text="RNG"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+    <ImageView
+            android:src="@drawable/dice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/randomPlayer"
-            app:layout_constraintCircle="@+id/toggleMenu"
+            tools:layout_editor_absoluteY="446dp"
+            tools:layout_editor_absoluteX="295dp"
+            app:layout_constraintCircle="@+id/menu"
             app:layout_constraintCircleRadius="0dp"
-            app:layout_constraintCircleAngle="72"
-            tools:layout_editor_absoluteY="342dp"
-            tools:layout_editor_absoluteX="162dp" />
+            app:layout_constraintCircleAngle="72" />
 
-    <Button
-            android:text="2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+    <ImageView
+            android:src="@drawable/players"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/numberOfPlayers"
-            app:layout_constraintCircle="@+id/toggleMenu"
+            app:layout_constraintCircle="@+id/menu"
             app:layout_constraintCircleRadius="0dp"
             app:layout_constraintCircleAngle="144"
-            tools:layout_editor_absoluteY="342dp"
-            tools:layout_editor_absoluteX="162dp" />
+            tools:layout_editor_absoluteY="353dp"
+            tools:layout_editor_absoluteX="193dp" />
 
-    <Button
-            android:text="HP"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+    <ImageView
+            android:src="@drawable/heart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/startLife"
-            app:layout_constraintCircle="@+id/toggleMenu"
+            app:layout_constraintCircle="@+id/menu"
             app:layout_constraintCircleRadius="0dp"
             app:layout_constraintCircleAngle="216"
-            tools:layout_editor_absoluteY="342dp"
-            tools:layout_editor_absoluteX="162dp" />
+            tools:layout_editor_absoluteY="353dp"
+            tools:layout_editor_absoluteX="193dp" />
 
-    <Button
-            android:text="FN"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/features"
-            app:layout_constraintCircle="@+id/toggleMenu"
+    <ImageView
+            android:src="@drawable/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/search"
+            app:layout_constraintCircle="@+id/menu"
             app:layout_constraintCircleRadius="0dp"
             app:layout_constraintCircleAngle="288"
-            tools:layout_editor_absoluteY="342dp"
-            tools:layout_editor_absoluteX="162dp" />
+            tools:layout_editor_absoluteY="353dp"
+            tools:layout_editor_absoluteX="193dp" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

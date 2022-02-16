@@ -11,6 +11,7 @@ import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.ScaleAnimation
 import android.widget.Button
+import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
 import androidx.fragment.app.Fragment
@@ -62,12 +63,12 @@ class MainMenuFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_menu_circular, container, false)
 
         // find the Buttons
-        val menuButton = view.findViewById<Button>(R.id.toggleMenu)
-        val restartButton = view.findViewById<Button>(R.id.restart)
-        val randomPlayerButton = view.findViewById<Button>(R.id.randomPlayer)
-        val numberOfPlayersButton = view.findViewById<Button>(R.id.numberOfPlayers)
-        val startLifeButton = view.findViewById<Button>(R.id.startLife)
-        val cardSearchButton = view.findViewById<Button>(R.id.features)
+        val menuButton = view.findViewById<ImageView>(R.id.menu)
+        val restartButton = view.findViewById<ImageView>(R.id.restart)
+        val randomPlayerButton = view.findViewById<ImageView>(R.id.randomPlayer)
+        val numberOfPlayersButton = view.findViewById<ImageView>(R.id.numberOfPlayers)
+        val startLifeButton = view.findViewById<ImageView>(R.id.startLife)
+        val cardSearchButton = view.findViewById<ImageView>(R.id.search)
 
         // set onClick for View to hide menu on backdrop click
         view.setOnClickListener {
@@ -142,7 +143,7 @@ class MainMenuFragment : Fragment() {
     // handles the animation of the circle menu
     private fun animateCircleMenu(viewIdArray: IntArray) {
         val duration = 200L
-        val radius = 250
+        val radius = 300
 
         // from hidden to visible
         var startRadius = 0

@@ -3,9 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="androidApp/src/main/res/drawable/dice.xml" value="0.2345" />
+        <entry key="androidApp/src/main/res/drawable/heart.xml" value="0.337" />
+        <entry key="androidApp/src/main/res/drawable/menu.xml" value="0.2345" />
+        <entry key="androidApp/src/main/res/drawable/minus.xml" value="0.2345" />
+        <entry key="androidApp/src/main/res/drawable/players.xml" value="0.2345" />
+        <entry key="androidApp/src/main/res/drawable/plus.xml" value="0.2345" />
+        <entry key="androidApp/src/main/res/drawable/restart.xml" value="0.2345" />
+        <entry key="androidApp/src/main/res/drawable/search.xml" value="0.2345" />
         <entry key="androidApp/src/main/res/layout/activity_main.xml" value="0.33489583333333334" />
         <entry key="androidApp/src/main/res/layout/fragment_menu.xml" value="0.33" />
-        <entry key="androidApp/src/main/res/layout/fragment_menu_circular.xml" value="0.34739583333333335" />
+        <entry key="androidApp/src/main/res/layout/fragment_menu_circular.xml" value="0.15733333333333333" />
         <entry key="androidApp/src/main/res/layout/fragment_player.xml" value="0.33489583333333334" />
       </map>
     </option>
